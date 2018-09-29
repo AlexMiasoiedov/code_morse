@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'code_morse'
-  s.version     = '0.0.2'
+  s.version     = '0.0.5'
   s.date        = '2018-09-29'
   s.summary     = ".... . .-.. .-.. ---  -- --- .-. ... . -.-.--"
   s.description = "A simple 'Morse Code' back and forth converter."

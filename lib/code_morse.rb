@@ -4,19 +4,26 @@ require_relative './morsify'
 
 at_exit { puts("\nbye bye!") }
 
-resp = []
+class CodeMorse
+  attr_reader :morse_tree
 
-morse_tree = Morse::Tree.new
-morse_tree.learn(MORSE_CHARS)
+  def initialize
+    @morse_tree = Morse::Tree.new
+    @morse_tree.learn(MORSE_CHARS)
+  end
 
-# TODO: wrap morse characters in sigle string
+  def call(params)
+    params = (params.is_a?(Array) ? params : [params]).flatten
+    out = []
 
-ARGV.each do |param|
-  if param =~ /\w/
-    resp.push(Morsify.new.call(param))
-  else # TODO: add regex for recognizing morse code only
-    resp.push(morse_tree.humanize(param))
+    params.each do |param|
+      if param =~ /\w/
+        out.push(Morsify.new.call(param))
+      else # TODO: add regex for recognizing morse code only
+        out.push(morse_tree.humanize(param))
+      end
+    end
+
+    out.join('  ')
   end
 end
-
-puts(resp.join('  '))
